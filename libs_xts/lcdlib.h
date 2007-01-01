@@ -72,7 +72,8 @@ static void lcd_print (void)
  }
  
  //lua_pushstring(s); // as return
- free(s);
+ 
+ //free(s);
 } 
 
 static void lcd_bpp (void)
@@ -91,7 +92,8 @@ static void lcd_bpp (void)
  }
  
  //lua_pushstring(s); // as return
- free(s);
+ 
+ //free(s);
 } 
 
 static void lcd_pct (void) {
@@ -114,7 +116,8 @@ static void lcd_pct (void) {
  }
  
  //lua_pushstring(s); // as return
- free(s);
+ 
+ //free(s);
 } 
 
 static void lcd_rect (void) {
@@ -188,7 +191,7 @@ static void lcd_backg (void) {
  }
  
  if (usedStr) {
-   free(s);
+   //free(s);
  }
 } 
 
@@ -235,10 +238,6 @@ static void lua_dofilexts (void)
 */
 void lcdlib_open (void)
 {
- //lua_register ("strfind", str_find);
- //lua_register ("strlen", str_len);
- //lua_register ("strsub", str_sub);
- //lua_register ("strlower", str_lower);
  lua_register ("lcdsetup", lcd_setup);
  lua_register ("lcdprint", lcd_print);
  
@@ -250,10 +249,6 @@ void lcdlib_open (void)
 
  lua_register ("lcdcls", lcd_cls); 
  lua_register ("lcdblitt", lcd_blitt); 
-
- // tmp here ....
- //lua_register ("dofile", lua_dofilexts); 
-
 }
 
 
