@@ -1,0 +1,47 @@
+-- Star Field FX routines
+--global SCREEN_WIDTH
+--global SCREEN_HEIGHT
+SCREEN_WIDTH=320
+SCREEN_HEIGHT=240
+--[[
+function drawStarFieldFrame(screenIter)
+	for i = 1, size do
+ 		starfield[i].z = starfield[i].z - speed
+		if starfield[i].z < speed then createStar(i) end
+		x = width / 2 + starfield[i].x / starfield[i].z
+		y = height / 2 + starfield[i].y / starfield[i].z
+ 		if x < 0 or y < 0 or x >= width or y >= height then
+ 			createStar(i)
+ 		else
+ 			screen:pixel(x, y, white)
+		end
+ 	end
+end
+]]--
+
+size = 200
+zMax = 5
+speed = 0.1
+
+width = SCREEN_WIDTH
+height = SCREEN_HEIGHT
+
+starfield = @{}
+math.randomseed(os.time())
+
+function createStar(i)
+	starfield[i] = {}
+	starfield[i].x = math.random(2*width) - width
+	starfield[i].y = math.random(2*height) - height
+	starfield[i].z = zMax
+end
+
+for i = 1, size do
+	createStar(i)
+	starfield[i].z = math.random(zMax)
+end
+
+white = Color.new(255, 255, 255)
+black = Color.new(0, 0, 0)
+
+
