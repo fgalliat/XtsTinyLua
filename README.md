@@ -1,8 +1,13 @@
-** Lite LUA for c++ **
+## Lite LUA for c++ 
 
-no libdeps (so) for initial impl
+** Xtase refacto (I don't remember where I found this source code ~10years
+ago....) **
+
+no libdeps (.so) required for initial impl
+
+./comp.sh -> regular build script
+./compLCD.sh -> build w/ Optional serial GPU routines (lcdlib)
+
 
 mount OPTIONAL lcdlib,mp3lib,gpiolib
- - by #ifdef directive
- - binded to cpp then to hardware
  - note that as long as lcd/mp3 uses SerialBridge : no .so are required !
