@@ -15,6 +15,8 @@ lcdprint( "".. 3.14 .."\n" )
 lcdrect( 10, 10, 128, 64, 1, 8 )
 lcdrect( 10, 10, 128, 64, 0, 6 )
 
+delay(1000)
+
 print("A.2\n")
 dofile("scripts/starfieldFX.lua")
 print("A.3\n")
