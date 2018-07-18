@@ -3,9 +3,12 @@
 **Xtase-fgalliat refacto (Jul 2018)** (I don't remember where I found this source code ~10years
 ago....)
 
+
+
 no libdeps (.so) required for initial impl
 
 ./comp.sh -> regular build script
+
 ./compLCD.sh -> build w/ Optional serial GPU routines (lcdlib)
 
 
