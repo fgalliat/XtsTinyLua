@@ -145,6 +145,36 @@ static void lcd_rect (void) {
  
 } 
 
+// drawAnimatedBackground
+static void lcd_backg (void) {
+ lua_Object o2 = lua_getparam (1);
+ if (!lua_isnumber(o2)) { lua_error ("incorrect arguments to function `lcdbackg'"); return; } 
+ int mode = (int)lua_getnumber(o2);
+ lua_Object o3 = lua_getparam (2);
+ if (!lua_isnumber(o3)) { lua_error ("incorrect arguments to function `lcdbackg'"); return; } 
+ int m1 = (int)lua_getnumber(o3);
+ o2 = lua_getparam (3);
+ if (!lua_isnumber(o2)) { lua_error ("incorrect arguments to function `lcdbackg'"); return; } 
+ int m2 = (int)lua_getnumber(o2);
+ o3 = lua_getparam (4);
+ if (!lua_isnumber(o3)) { lua_error ("incorrect arguments to function `lcdbackg'"); return; } 
+ int m3 = (int)lua_getnumber(o3);
+ o2 = lua_getparam (5);
+ if (!lua_isnumber(o2)) { lua_error ("incorrect arguments to function `lcdbackg'"); return; } 
+ int m4 = (int)lua_getnumber(o2);
+ 
+ if ( !inited ) {
+   printf("(!!)-[not initialized]-(LCD) BACKG\n");
+ } else {
+   screen.drawAnimatedBackground( mode, m1, m2, m3, m4 );
+ }
+ 
+} 
+
+
+
+
+
 static void lcd_blitt (void) {
  lua_Object o2 = lua_getparam (1);
  if (!lua_isnumber(o2)) { lua_error ("incorrect arguments to function `lcdrect'"); return; } 
@@ -194,6 +224,8 @@ void lcdlib_open (void)
  lua_register ("lcdbpp", lcd_bpp); 
  lua_register ("lcdpct", lcd_pct); 
  lua_register ("lcdrect", lcd_rect); 
+
+ lua_register ("lcdbackg", lcd_backg); 
 
  lua_register ("lcdcls", lcd_cls); 
  lua_register ("lcdblitt", lcd_blitt); 

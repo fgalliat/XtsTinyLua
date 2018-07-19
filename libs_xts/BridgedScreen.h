@@ -58,6 +58,7 @@
 
         void drawBall(int x, int y, int radius, uint16_t color=1);
 
+        void drawAnimatedBackground(int mode, int m1, int m2, int m3, int m4);
 
         void blitt(uint8_t mode);
         // setMode(int mode);
