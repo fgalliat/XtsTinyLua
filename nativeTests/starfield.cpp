@@ -29,15 +29,14 @@
 // Arduino .cos(rad)
 
 static bool firstRND=true;
+
 float rnd(float d1) {
-
-
  if (firstRND) {
    firstRND = false;
    srand( time(NULL) );
  }
 
-return (float)( (rand() % 10000) / 10000.0 * (double)d1 );
+ return (float)( (rand() % 10000) / 10000.0 * (double)d1 );
 }
 
 
@@ -65,24 +64,22 @@ void drawStarFieldFrame();
 
 
 void setup() {
-
   // Serial.begin(115200);
-
   printf("Starting screen\n");
-
   screen.cls();
-  
 }
 
 void loop() {
+ screen.blitt(0);
+ screen.cls();
  drawStarFieldFrame();
+ screen.blitt(2);
 }
 
 
 
 int main(int argc, char* argv[] ) {
   screen.cls();
-
   setup();
 
   for (int i=0; i < 50; i++) {
@@ -112,9 +109,9 @@ int main(int argc, char* argv[] ) {
 // ----------------------------------------------------------------------
 
 typedef struct {
-    double x;
-    double y;
-    double z;
+    float x;
+    float y;
+    float z;
 } Star;
 
 // TO-LOOK
@@ -141,9 +138,10 @@ void initStars();
 void drawStarFieldFrame() {
   if ( !inited ) {
     initStars();
+    inited = true;
   }
 
-  screen.cls();
+  // screen.cls();
   
   for(int i=0; i < size; i++) {
     if ( starfield[i].z <= speed ) {
