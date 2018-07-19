@@ -1,2 +1,4 @@
 luac
 luaLCD
+a.out
+*.o
