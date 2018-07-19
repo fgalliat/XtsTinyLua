@@ -156,7 +156,14 @@ void drawStarFieldFrame() {
     if ( x<0 || y<0 || x>=width || y>=height ) {
       createStar(i);
     } else {
-      screen.drawRect( x, y, 1,1, 1, 1 );
+      int zy = (int)starfield[i].z;
+      if ( zy < 1 ) { zy = 1; }
+      int zz = (zMax / zy );
+      if (zz < 1) { zz=1; }
+      int xx = x-(zz/2); if ( xx < 0 ) { xx=0; }
+      int yy = y-(zz/2); if ( yy < 0 ) { yy=0; }
+      
+      screen.drawRect( xx, yy, zz,zz, 1, 1 );
     }
   }
   
