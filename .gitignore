@@ -1,6 +1,7 @@
 luac
 luaLCD
 ballLCD
+wallLCD
 starLCD
 a.out
 *.o
