@@ -53,5 +53,29 @@ while e <= 100 do
 
   e = e+1
 end
+
+-- draw walls
+lcdcls()
+-- height 0..240 // attr 0..3
+function itrsf(height, attr)
+  hh = floor( height / 3.80 )
+  val= (hh * 4) + attr
+  return val
+end
+
+walls = "00"
+
+e=1
+while e<=32 do
+ -- walls = walls .. "\x6F" -- 111
+ 
+ --print( strhex( itrsf(200, 4) ) .. "\n" )
+ 
+ walls = walls .. strchr( itrsf( rnd(240) , 2) )
+ e=e+1
+end
+
+lcdbackg(3, walls, 32)
+
 print("A.7\n")
 
