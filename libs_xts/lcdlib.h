@@ -150,25 +150,46 @@ static void lcd_backg (void) {
  lua_Object o2 = lua_getparam (1);
  if (!lua_isnumber(o2)) { lua_error ("incorrect arguments to function `lcdbackg'"); return; } 
  int mode = (int)lua_getnumber(o2);
+   
+ char* s; bool usedStr = false;
+ int m1,m2,m3,m4;
+
  lua_Object o3 = lua_getparam (2);
- if (!lua_isnumber(o3)) { lua_error ("incorrect arguments to function `lcdbackg'"); return; } 
- int m1 = (int)lua_getnumber(o3);
- o2 = lua_getparam (3);
- if (!lua_isnumber(o2)) { lua_error ("incorrect arguments to function `lcdbackg'"); return; } 
- int m2 = (int)lua_getnumber(o2);
- o3 = lua_getparam (4);
- if (!lua_isnumber(o3)) { lua_error ("incorrect arguments to function `lcdbackg'"); return; } 
- int m3 = (int)lua_getnumber(o3);
- o2 = lua_getparam (5);
- if (!lua_isnumber(o2)) { lua_error ("incorrect arguments to function `lcdbackg'"); return; } 
- int m4 = (int)lua_getnumber(o2);
+
+ if (lua_isstring(o3)) { 
+   s = lua_getstring(o3);
+   usedStr = true;
+
+   o2 = lua_getparam (3);
+   if (!lua_isnumber(o2)) { lua_error ("incorrect arguments to function `lcdbackg'"); return; } 
+   m1 = (int)lua_getnumber(o2);
+ } else {
+   if (!lua_isnumber(o3)) { lua_error ("incorrect arguments to function `lcdbackg'"); return; } 
+   m1 = (int)lua_getnumber(o3);
+   o2 = lua_getparam (3);
+   if (!lua_isnumber(o2)) { lua_error ("incorrect arguments to function `lcdbackg'"); return; } 
+   m2 = (int)lua_getnumber(o2);
+   o3 = lua_getparam (4);
+   if (!lua_isnumber(o3)) { lua_error ("incorrect arguments to function `lcdbackg'"); return; } 
+   m3 = (int)lua_getnumber(o3);
+   o2 = lua_getparam (5);
+   if (!lua_isnumber(o2)) { lua_error ("incorrect arguments to function `lcdbackg'"); return; } 
+   m4 = (int)lua_getnumber(o2);
+ }
  
  if ( !inited ) {
    printf("(!!)-[not initialized]-(LCD) BACKG\n");
  } else {
-   screen.drawAnimatedBackground( mode, m1, m2, m3, m4 );
+   if ( usedStr ) {
+     screen.drawAnimatedBackground( mode, (uint8_t*)s, m1 );
+   } else {
+     screen.drawAnimatedBackground( mode, m1, m2, m3, m4 );
+   }
  }
  
+ if (usedStr) {
+   free(s);
+ }
 } 
 
 

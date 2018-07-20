@@ -295,3 +295,19 @@ unsigned char txBuff[32];
         flushRX(serial);      
     }
 
+    void BridgedScreen::drawAnimatedBackground(int mode, uint8_t* scene, int sceneLen) {
+        int len = 1; txBuff[0] = 0x61; 
+        serial->write( txBuff, len );
+        
+        len = 1; txBuff[0] = mode; 
+        serial->write( txBuff, len );
+        
+        len = sceneLen;
+        serial->write( scene, len );
+
+        len = 1; txBuff[0] = 0x00;
+        serial->write( txBuff, len );
+
+        flushRX(serial);      
+    }
+
