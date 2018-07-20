@@ -34,8 +34,36 @@
 Serial serial("/dev/ttyS1");
 BridgedScreen screen( &serial );
 
+#define SCREEN_HEIGHT 240
 
+int irnd(int max) {
+  return rand() % max;
+}
 
+void drawRect(int x, int y, int w, int h, int light) {
+  int mode = 1;
+  int color = 1;
+  
+  if ( light == 0 ) {
+    color = 4; // dark gray
+    mode = 1;
+  } else if ( light == 1 ) {
+    color = 3;
+    mode = 1;
+  } else if ( light == 2 ) {
+    color = 2; // light gray
+    mode = 1;
+  } else if ( light == 3 ) {
+    color = 1; // white
+    mode = 1;
+  }  
+  
+  screen.drawRect( x, y, w, h, mode, color );
+}
+
+void drawStrip(int i, int h, int light) {
+  drawRect( 5+(i*10), (SCREEN_HEIGHT-h)/2, 10, h, light );
+}
 
 uint8_t w_scene[32];
 
@@ -64,9 +92,20 @@ void w_drawScene() {
   int bckAttribs = w_scene[0];
   int wllAttribs = w_scene[1];
   
+  // STILL TODO : draw floor & sky
+  //screen.cls();
+  screen.drawRect(15, 0, 290, 120, 1, 9); // light-blue sky
+  screen.drawRect(15, 120, 290, 120, 1, 5); // light-green floor
+  
+  
   uint8_t wall;
   for(int i=0; i < 30; i++) {
     wall = w_scene[2+i];
+
+    int height = (int) ((float) ((wall >> 2) % 64) * 3.80f);
+    int attr   = wall % 4;
+
+    drawStrip( i, height, attr );
   }
 }
 
@@ -76,6 +115,13 @@ int main(int argc, char** argv) {
  int val = 240 + 15;
  
  printf("Hello \n");
+ screen.cls();
+
+
+ w_scene[0] = 1;
+ w_scene[1] = 1;
+ for(int i=0; i < 30; i++) { w_scene[2+i] = w_itrsf(irnd( 240 ), i%4); }
+ w_drawScene();
  
  //trsf(val);
 
