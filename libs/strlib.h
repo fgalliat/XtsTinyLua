@@ -108,6 +108,37 @@ static void str_upper (void)
  free(s);
 } 
 
+static void str_hex (void)
+{
+ char s[3]; int num;
+ lua_Object o = lua_getparam (1);
+ if (!lua_isnumber(o))
+ { lua_error ("incorrect arguments to function `strhex'"); return; }
+ num = (int)lua_getnumber(o);
+ 
+ s[2] = 0x00;
+ sprintf(s, "%02X", num);
+
+ lua_pushstring(s);
+// free(s);
+} 
+
+static void str_chr (void)
+{
+ char s[2]; int num;
+ lua_Object o = lua_getparam (1);
+ if (!lua_isnumber(o))
+ { lua_error ("incorrect arguments to function `strhex'"); return; }
+ num = (int)lua_getnumber(o);
+ 
+ s[1] = 0x00;
+ //sprintf(s, "%02X", num);
+ s[0] = (char)num;
+
+ lua_pushstring(s);
+// free(s);
+} 
+
 
 /*
 ** Open string library
@@ -119,6 +150,9 @@ void strlib_open (void)
  lua_register ("strsub", str_sub);
  lua_register ("strlower", str_lower);
  lua_register ("strupper", str_upper);
+
+ lua_register ("strhex", str_hex);
+ lua_register ("strchr", str_chr);
 }
 
 
