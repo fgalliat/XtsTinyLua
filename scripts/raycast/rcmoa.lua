@@ -2,17 +2,11 @@
 --Coded By R. Yonaba
 --Uses raycasting algorithm , so credits to him.
 
---set language
---cfg=io.open("cfg.dat","r")
---lang=string.sub(cfg:read(),1,2)
---cfg:close()
 
 lang="en"
 
 --set messages
---font=Font.createMonoSpaced()
---font:setPixelSizes(12,12)
-text={}
+text=@{}
 text["fr"]="Plus de Temps !"
 text["en"]="Time is Over !"
 
@@ -24,22 +18,8 @@ text["en"]="Time is Over !"
 --elseif lvl>4 then lvl=4 end
 lvl = 1
 
---     -= Init Trigo =-
---     -= TODO : move away =-
---[[
-pibt  = (math.pi / 180)
-_math_cos = {}
-_math_sin = {}
-local iangle;
-for iangle=0,360 do
-  _math_cos[iangle+1] = math.cos( iangle * pibt );
-  _math_sin[iangle+1] = math.sin( iangle * pibt );
-end
-]]--
-
--- !! BEWARE : on pc, it is ../ from here !!
-dofile(CWD_PATH.."trigo.lua");
-
+--   -= Begin Trigo =-
+PITR = 3.141596 / 180
 function math_angle(iangle)
   iangle = int(iangle);
   iangle = iangle % 360; 
@@ -48,34 +28,29 @@ function math_angle(iangle)
   return iangle;
 end 
 
-function math_cos(iangle) return _math_cos[iangle+1] end
-function math_sin(iangle) return _math_sin[iangle+1] end
-
+function math_cos(iangle) return cos(iangle*PITR) end
+function math_sin(iangle) return sin(iangle*PITR) end
 --   -= End Trigo =-
 
 --loads map from file
-if isDektop() then
-  --dofile("maps/map"..lvl..".map")
-  dofile(CWD_PATH.."raycast/map"..lvl.."rc.lua")
-else
+--if isDektop() then
+--  --dofile("maps/map"..lvl..".map")
+--  dofile(CWD_PATH.."raycast/map"..lvl.."rc.lua")
+--else
   dofile("map"..lvl.."rc.lua")
-end
+--end
 
-map_width  = 11
-map_height = table.getn(map)
-
-
---screen  size
-screenx  = 480
-screeny  = 272
-
-screenx  = screen.WIDTH
-screeny  = screen.HEIGHT
+--map_width  = 11
+--map_height = table.getn(map)
 
 
---background
---background=Image.createEmpty(44,44)
---background:clear(Color.new(255,100,100))
+-- Screen  size
+--screenx  = 480
+--screeny  = 272
+--screenx  = screen.WIDTH
+--screeny  = screen.HEIGHT
+screenx  = 320
+screeny  = 240
 
 --set field of View
 fov     = 60 

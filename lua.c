@@ -3,6 +3,10 @@
 ** Linguagem para Usuarios de Aplicacao
 ** TeCGraf - PUC-Rio
 ** 28 Apr 93
+**
+**
+** Re-forked by Xtase-fgalliat @Jul2018
+**
 */
 
 #include <stdio.h>
